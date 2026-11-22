@@ -1,0 +1,64 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "title": "Database Query Rate (reads/s)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum(rate(db_reads_total[1m])) by (database)",
+          "legendFormat": "{{database}} reads/s"
+        }
+      ]
+    },
+    {
+      "title": "Database Error Rate (errors/s)",
+      "type": "timeseries",
+      "gridPos": { "h": 12, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum(rate(db_errors_total[1m])) by (database)",
+          "legendFormat": "{{database}} errors/s"
+        }
+      ]
+    },
+    {
+      "title": "Cumulative Database Reads",
+      "type": "stat",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "expr": "sum(db_reads_total) by (database)",
+          "legendFormat": "{{database}}"
+        }
+      ]
+    },
+    {
+      "title": "Cumulative Database Errors",
+      "type": "stat",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [
+        {
+          "expr": "sum(db_errors_total) by (database)",
+          "legendFormat": "{{database}}"
+        }
+      ]
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["database", "mongodb"],
+  "time": { "from": "now-15m", "to": "now" },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Database Dashboard",
+  "uid": "database-overview"
+}
