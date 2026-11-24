@@ -3,6 +3,7 @@ services:
     image: mongo:7.0
     container_name: helloworld-mongodb
     restart: unless-stopped
+    profiles: ["local-db"]
     ports:
       - "27017:27017"
     environment:
@@ -44,15 +45,13 @@ services:
       - "8080"
     environment:
       HTTP_ADDR: ":8080"
-      MONGO_URI: "mongodb://mongodb:27017"
-      MONGO_DB: "hello_world"
+      MONGO_URI: ${MONGO_URI:-mongodb://mongodb:27017}
+      MONGO_DB: ${MONGO_DB:-hello_world}
       REDIS_ADDR: "redis:6379"
       REDIS_TTL_SECONDS: "300"
       SHUTDOWN_TIMEOUT_SECONDS: "10"
       LOG_LEVEL: "info"
     depends_on:
-      mongodb:
-        condition: service_healthy
       redis:
         condition: service_healthy
     healthcheck:
