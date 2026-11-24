@@ -1,0 +1,11 @@
+# GCP Project & Region
+project_id = "terraform-gcp-lab-bipin"
+region     = "asia-south1"
+
+# MongoDB Atlas Connection
+mongo_uri = "mongodb+srv://bko1974:bipin1974@taskmanagercluster.jwtpwgc.mongodb.net/hello_world?retryWrites=true&w=majority"
+mongo_db  = "hello_world"
+
+# Container Image Tags (optional, defaults to latest)
+backend_image_tag  = "latest"
+frontend_image_tag = "latest"
