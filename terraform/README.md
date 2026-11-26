@@ -65,3 +65,4 @@ To tear down all resources and avoid ongoing costs:
 ```bash
 terraform destroy -auto-approve
 ```
+Check it
