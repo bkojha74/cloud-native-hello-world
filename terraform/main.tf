@@ -28,10 +28,11 @@ locals {
 
 # 3. Backend Cloud Run Service
 resource "google_cloud_run_v2_service" "backend" {
-  depends_on = [google_artifact_registry_repository.docker_repo]
-  name       = "helloworld-backend"
-  location   = var.region
-  ingress    = "INGRESS_TRAFFIC_ALL"
+  depends_on          = [google_artifact_registry_repository.docker_repo]
+  name                = "helloworld-backend"
+  location            = var.region
+  ingress             = "INGRESS_TRAFFIC_ALL"
+  deletion_protection = false
 
   template {
     scaling {
@@ -94,10 +95,11 @@ resource "google_cloud_run_v2_service_iam_member" "backend_public" {
 
 # 4. Frontend Cloud Run Service
 resource "google_cloud_run_v2_service" "frontend" {
-  depends_on = [google_cloud_run_v2_service.backend]
-  name       = "helloworld-frontend"
-  location   = var.region
-  ingress    = "INGRESS_TRAFFIC_ALL"
+  depends_on          = [google_cloud_run_v2_service.backend]
+  name                = "helloworld-frontend"
+  location            = var.region
+  ingress             = "INGRESS_TRAFFIC_ALL"
+  deletion_protection = false
 
   template {
     scaling {
@@ -117,15 +119,11 @@ resource "google_cloud_run_v2_service" "frontend" {
         name  = "BACKEND_URL"
         value = google_cloud_run_v2_service.backend.uri
       }
-      env {
-        name  = "PORT"
-        value = "80"
-      }
 
       resources {
         limits = {
           cpu    = "1000m"
-          memory = "256Mi"
+          memory = "512Mi"
         }
       }
 
