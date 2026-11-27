@@ -241,3 +241,5 @@ This repository includes two independent **GitHub Actions** workflows:
 ├── docker-compose.yml               # Local multi-service orchestration
 └── README.md
 ```
+
+Like it!
